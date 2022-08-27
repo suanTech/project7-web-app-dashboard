@@ -105,7 +105,7 @@ trafficNav.addEventListener('click', (e) => {
 	}
 	if(btn.classList.contains('traffic-link')) {
 		btn.classList.add('active');
-	};
+	} 
 	if (btn.textContent === 'Weekly') {
 		let labels = ['16-22', '23-29', '30-5', '6-12', '13-19', '20-26', '27-3', '4-10', '11-17', '16-24', '25-31'];
 		let data = [750, 1250, 1000, 2000, 1500, 1750, 1250, 1850, 2250, 1500, 2500]
@@ -204,48 +204,50 @@ send.addEventListener('click', () => {
 const users = ["Victoria Chambers", "Dale Byrd", "Dawn Wood", "Dan Oliver"]
 
 
-autocomplete(userInput, users);
+userInput.addEventListener('input', () => {
+    autocomplete(userInput,users)
+});
 
 function autocomplete(inp, arr) {
 	let currentFocus;
-	inp.addEventListener("input", (e) => {
+	inp.addEventListener("input", function(e) {
 		let inputDiv, matchingDiv, i, val = this.value;
 		closeAllLists();
 		if (!val) {
 			return false;
 		}
 		currentFocus = -1;
-		inputDiv = document.createElement("div");
+		inputDiv = document.createElement("DIV");
 		inputDiv.setAttribute("id", this.id + "autocomplete-list");
 		inputDiv.setAttribute("class", "autocomplete-items");
 		this.parentNode.appendChild(inputDiv);
 		for (i=0; i < arr.length; i++) {
 			if (arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
-				matchingDiv = document.createElement("div");
+				matchingDiv = document.createElement("DIV");
 				matchingDiv.innerHTML = "<strong>" + arr[i].substr(0, val.length) + "</strong>";
 				matchingDiv.innerHTML += arr[i].substr(val.length);
 				matchingDiv.innerHTML += "<input type='hidden' value'" + arr[i] + "'>";
 
-				matchingDiv.addEventListener("click", (e) => {
-					inp.value = this.getElementsByTagName("input")[0].value;
+				matchingDiv.addEventListener("click", () => {
+					inp.value = this.getElementsByTagName("input")[1].value;
 					closeAllLists();
 				});
 				inputDiv.appendChild(matchingDiv);
 			}
 		}
 	});
-	inp.addEventListener("keydown", (e) => {
+	inp.addEventListener("keydown", function(e) { //why (e) => {} not working? solved-'this' keyword doesn't work with arrow function
 		let x = document.getElementById(this.id + "autocomplete-list");
 		if (x) {
 			x = x.getElementsByTagName("div");
 		};
-		if (e.code == "ArrowDown") {
+		if (e.key === "ArrowUp") {
 			currentFocus++;
 			addActive(x);
-		} else if (e.code == "ArrowUp") {
+		} else if (e.key === "ArrowDown") {
 			currentFocus--;
 			addActive(x);
-		} else if (e.code == 13) {
+		} else if (e.keyCode == 13) {
 			e.preventDefault();
 			if (currentFocus > -1) {
 				if (x) {
@@ -261,7 +263,7 @@ function autocomplete(inp, arr) {
 			currentFocus = 0;
 		}
 		if (currentFocus < 0) {
-			currentFocus = (x.length -1);
+			currentFocus = (x.length - 1);
 		}
 		x[currentFocus].classList.add("autocomplete-active");
 	}
@@ -282,3 +284,4 @@ function autocomplete(inp, arr) {
 		closeAllLists(e.target);
 	});
 };
+

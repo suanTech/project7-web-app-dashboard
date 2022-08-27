@@ -86,6 +86,10 @@ button {
     cursor: pointer
 }
 
+input {
+    overflow: visible;
+}
+
 .close-btn {
     cursor: pointer;
 }
@@ -99,6 +103,11 @@ button {
 
 :focus {
     outline: none;
+}
+
+input:focus,
+textarea:focus {
+    border: 2px solid rgba(119, 179, 184, 0.4);
 }
 
 .button-box{
@@ -414,7 +423,6 @@ button {
 /* message form */
 .input-box,
 .message-box {
-    display: block;
     margin-top: 15px;
     border: var(--bdr-grey);
     border-radius: 5px;
@@ -441,11 +449,12 @@ button {
 
 .autocomplete-items {
     position: absolute;
-    border: 1px solid #d4d4d4;
+    border: 1px solid var(--bdr-grey);
     border-bottom: none;
     border-top: none;
+    width: 100%;
     z-index: 99;
-    top: 100%;
+    top: 98%;
     left: 0;
     right: 0;
 }
@@ -454,6 +463,10 @@ button {
     padding: 10px;
     cursor: pointer;
     border-bottom: var(--bdr-grey);
+    border-left: 3px solid rgba(119, 179, 184, 0.4);
+    border-right: 3px solid rgba(119, 179, 184, 0.4);
+    background-color: white;
+    border-radius: 3px;
 }
 
 .autocomplete-items div:hover {
@@ -461,7 +474,7 @@ button {
 }
 
 .autocomplete-active {
-    background-color: var(--clr-main);
+    background-color: var(--clr-main) !important;
     color: white;
 }
 
