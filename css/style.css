@@ -6,15 +6,14 @@
     --clr-lightMain: #9cc2c6;
     --clr-accent: #ac67a7;
     --clr-text: #001320;
-    --clr-text-light: #8d9192;
+    --clr-text-light: #7a7e7f;
     --clr-grey: #C8D1D6;
     --clr-light: #f7f9fa;
     /* border */
     --bdr-grey: 1px solid var(--clr-grey);
 }
 
-/*  Initial styles  */
-
+/**===     Initial styling    ===**/
 body, 
 button,
 p,
@@ -84,6 +83,11 @@ a {
 button {
     border: 0;
     background-color: transparent;
+    cursor: pointer
+}
+
+.close-btn {
+    cursor: pointer;
 }
 
 ::placeholder {
@@ -97,6 +101,12 @@ button {
     outline: none;
 }
 
+.button-box{
+    display: block;
+    width: 100%;
+    margin: 15px auto;
+}
+
 .round-box {
     border-radius: 5px;
     border: var(--bdr-grey);
@@ -107,6 +117,16 @@ button {
 }
 
 .show {
+    display: block;
+}
+
+.isHidden {
+    opacity: 0;
+    left: -100%;
+    height: 0;
+    font-size: 0;
+    padding: 0;
+    margin: 0 auto;
     display: block;
 }
 
@@ -128,8 +148,7 @@ button {
 }
 
 
-/*  Header  */
-
+/**===     Header    ===**/
 .header {
     grid-area: header;
     display: flex;
@@ -229,8 +248,10 @@ button {
     height: 35px;
     margin-right: 10px;
 }
+ 
 
-/*  Navigation  */
+/**===     Navigation    ===**/
+
 .nav {
     grid-area: nav;
     display: flex;
@@ -247,8 +268,9 @@ button {
     filter: invert(.9);
 }
 
-/*  Main  */
 
+/**===     Main    ===**/
+/* main header */
 .main {
     display: grid;
     grid-area: 'main';
@@ -272,14 +294,8 @@ button {
     background-color: var(--clr-light);
 }
 
-.button-box{
-    display: block;
-    width: 100%;
-}
-
 .button-box,
 .alert {
-    margin: 15px auto;
     border: none;
     border-radius: 5px;
     padding: 10px 15px;
@@ -294,29 +310,13 @@ button {
     opacity: 1;
 }
 
-.isHidden {
-    opacity: 0;
-    left: -100%;
-    height: 0;
-    font-size: 0;
-    padding: 0;
-    margin: 0 auto;
-    display: block;
-}
-
 .alert {
     display: flex;
     justify-content: space-between;
     margin: 15px;
 }
 
-.widget-container-full,
-.widget-container-half {
-    align-self: center;
-    margin: 20px auto;
-    width: 90%;
-}
-
+/* Chart */
 .traffic-nav {
     display: flex;
     flex-direction: row;
@@ -327,7 +327,17 @@ button {
 
 .traffic-link {
     padding: 10px 12px;
+    cursor: pointer;
 }
+
+.widget-container-full,
+.widget-container-half {
+    align-self: center;
+    margin: 20px auto;
+    width: 90%;
+}
+
+/* social */
 .social-box {
     display: flex;
     flex-direction: row;
@@ -369,6 +379,7 @@ button {
     line-height: 0.8;
 }
 
+/* member */
 .member-card {
     display: flex;
     flex-direction: column;
@@ -400,6 +411,7 @@ button {
     display: none;
 }
 
+/* message form */
 .input-box,
 .message-box {
     display: block;
@@ -416,11 +428,44 @@ button {
 }
 
 #send-btn {
-    width: 100%;
     height: 45px;
     border: var(--bdr-grey);
 }
 
+/* user input autocomplete */
+.autocomplete {
+    width: 100%;
+    position: relative;
+    display: inline-block;
+}
+
+.autocomplete-items {
+    position: absolute;
+    border: 1px solid #d4d4d4;
+    border-bottom: none;
+    border-top: none;
+    z-index: 99;
+    top: 100%;
+    left: 0;
+    right: 0;
+}
+
+.autocomplete-items div {
+    padding: 10px;
+    cursor: pointer;
+    border-bottom: var(--bdr-grey);
+}
+
+.autocomplete-items div:hover {
+    background-color: var(--clr-lightMain);
+}
+
+.autocomplete-active {
+    background-color: var(--clr-main);
+    color: white;
+}
+
+/* settings */
 .toggle {
     cursor: pointer;
     display: flex;
@@ -442,6 +487,7 @@ button {
     background: var(--clr-light);
     transition: background 0.25s;
 }
+
 .toggle-switch:before, .toggle-switch:after {
     content: "";
 }

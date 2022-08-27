@@ -33,18 +33,18 @@
         <h4 class="white-text">Student Name</h4>
     </header>
     <nav class="nav">
-        <a><img class="nav-icon" src="svgs/home.svg"></a>
-        <a><img class="nav-icon" src="svgs/bar-chart.svg"></a>
-        <a><img class="nav-icon" src="svgs/members.svg"></a>
-        <a><img class="nav-icon" src="svgs/settings.svg"></a>
+        <a href="#top"><img class="nav-icon" src="svgs/home.svg"></a>
+        <a href="#chart"><img class="nav-icon" src="svgs/bar-chart.svg"></a>
+        <a href="#members"><img class="nav-icon" src="svgs/members.svg"></a>
+        <a href="#settings"><img class="nav-icon" src="svgs/settings.svg"></a>
     </nav>
-    <main class="main">
+    <main class="main" id="top">
         <div class="main-header">
             <h2 class="tab">Dashboard</h2>
             <div class="tab-bg"></div>
         </div>
         <div class="alert" id="alert"></div>
-        <section class="traffic">
+        <section class="traffic" id="chart">
             <div class="traffic-header">
                 <h3>TRAFFIC</h3>
                 <ul class="traffic-nav">
@@ -108,7 +108,7 @@
                 </div>
             </div>
         </section>
-        <section class="members">
+        <section class="members" id="members">
             <h3>NEW MEMBERS</h3>
             <div class="member-card">
                 <img class="member-photo round" src="images/member-1.jpg" alt="photo of Victoria Chambers">
@@ -181,13 +181,15 @@
         </section>
         <section class="message">
             <h3>MESSAGE USER</h3>
-            <form>
-                <input class="input-box" type="text" placeholder="Search for User">
-                <textarea class="message-box" placeholder="Message for User"></textarea>
+            <form autocomplete="off">
+                <div class="autocomplete">
+                    <input class="input-box" type="text" id="userInput" placeholder="Search for User">
+                </div>
+                <textarea class="message-box" id="messageField" placeholder="Message for User"></textarea>
                 <button class="button-box" id="send-btn">SEND</button>
             </form>
         </section>
-        <section class="settings">
+        <section class="settings" id="settings">
             <h3>SETTINGS</h3>
             <div class="switch">
                 <label class="toggle">

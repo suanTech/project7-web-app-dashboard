@@ -7,9 +7,12 @@ const notification = document.querySelector('.notification-btn');
 const notificationDot = document.getElementById('notification-dot');
 const dropdownCont = document.getElementById('dropdown-box');
 const trafficNav = document.querySelector('.traffic-nav');
+const userInput = document.getElementById('userInput');
+const message = document.getElementById('messageField');
+const send = document.getElementById('send-btn');
 
-
-// Notification button 
+// Notification
+// --- bell button display dropdown
 notification.addEventListener('click',(e) => {
 	const btn = e.target;
 	if (btn.classList.contains('bell')) {
@@ -22,8 +25,7 @@ notification.addEventListener('click',(e) => {
 		}
 	}
 });
-
-// Dropdown disappear when click messages 
+// --- dropdown disappear when messages clicked
 dropdownCont.addEventListener('click', (e) => {
 	const element = e.target;
 	if (element.classList.contains('close-btn')) {
@@ -32,6 +34,7 @@ dropdownCont.addEventListener('click', (e) => {
 		bellBtn.style.transform = 'scale(1) rotate(0)';
 	}
 });
+
 
 // Alert banner 
 alertBanner.innerHTML = `
@@ -93,7 +96,7 @@ function newChart(chart, labels, data) {
 	chart.update();
 }
 
-// --- active button changes graph
+// --- active nav button changes graph
 trafficNav.addEventListener('click', (e) => {
 	const btn = e.target;
 	const li = document.getElementsByClassName('traffic-link');
@@ -182,3 +185,100 @@ const mobileChart = new Chart(mobileCanvas, {
 	data: mobileData,
 	options: mobileOptions
 });
+
+// Message 
+// --- send button check form validation
+
+send.addEventListener('click', () => {
+	if (userInput.value === "" && message.value === ""){
+		alert("Please add user and fill out message field.");
+	} else if (userInput.value === "") {
+		alert("Please add User")
+	} else if (message.value === "") {
+		alert("Please fill out Message field")
+	} else {
+		alert(`Message has been successfully sent to: ${userInput.value}`)
+	};
+})
+// --- autocomplete user field
+const users = ["Victoria Chambers", "Dale Byrd", "Dawn Wood", "Dan Oliver"]
+
+
+autocomplete(userInput, users);
+
+function autocomplete(inp, arr) {
+	let currentFocus;
+	inp.addEventListener("input", (e) => {
+		let inputDiv, matchingDiv, i, val = this.value;
+		closeAllLists();
+		if (!val) {
+			return false;
+		}
+		currentFocus = -1;
+		inputDiv = document.createElement("div");
+		inputDiv.setAttribute("id", this.id + "autocomplete-list");
+		inputDiv.setAttribute("class", "autocomplete-items");
+		this.parentNode.appendChild(inputDiv);
+		for (i=0; i < arr.length; i++) {
+			if (arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
+				matchingDiv = document.createElement("div");
+				matchingDiv.innerHTML = "<strong>" + arr[i].substr(0, val.length) + "</strong>";
+				matchingDiv.innerHTML += arr[i].substr(val.length);
+				matchingDiv.innerHTML += "<input type='hidden' value'" + arr[i] + "'>";
+
+				matchingDiv.addEventListener("click", (e) => {
+					inp.value = this.getElementsByTagName("input")[0].value;
+					closeAllLists();
+				});
+				inputDiv.appendChild(matchingDiv);
+			}
+		}
+	});
+	inp.addEventListener("keydown", (e) => {
+		let x = document.getElementById(this.id + "autocomplete-list");
+		if (x) {
+			x = x.getElementsByTagName("div");
+		};
+		if (e.code == "ArrowDown") {
+			currentFocus++;
+			addActive(x);
+		} else if (e.code == "ArrowUp") {
+			currentFocus--;
+			addActive(x);
+		} else if (e.code == 13) {
+			e.preventDefault();
+			if (currentFocus > -1) {
+				if (x) {
+					x[currentFocus].click();
+				}
+			}
+		}
+	});
+	function addActive(x) {
+		if (!x) return false;
+		removeActive(x);
+		if (currentFocus >= x.length) {
+			currentFocus = 0;
+		}
+		if (currentFocus < 0) {
+			currentFocus = (x.length -1);
+		}
+		x[currentFocus].classList.add("autocomplete-active");
+	}
+	function removeActive(x) {
+		for (let i =0; i < x.length; i++) {
+			x[i].classList.remove("autocomplete-active");
+		}
+	}
+	function closeAllLists(el) {
+		let x = document.getElementsByClassName("autocomplete-items");
+		for (let i=0; i < x.length; i++) {
+			if (el != x[i] && el != inp) {
+				x[i].parentNode.removeChild(x[i]);
+			}
+		}
+	}
+	document.addEventListener("click", function (e) {
+		closeAllLists(e.target);
+	});
+};
