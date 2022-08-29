@@ -203,8 +203,7 @@ send.addEventListener('click', () => {
 // --- autocomplete user field
 const users = ["Victoria Chambers", "Dale Byrd", "Dawn Wood", "Dan Oliver"]
 
-
-userInput.addEventListener('input', () => {
+userInput.addEventListener('click', () => { // event listener should be for "click"
     autocomplete(userInput,users)
 });
 
@@ -213,7 +212,7 @@ function autocomplete(inp, arr) {
 	inp.addEventListener("input", function(e) {
 		let inputDiv, matchingDiv, i, val = this.value;
 		closeAllLists();
-		if (!val) {
+		if (!val || val === " ") {
 			return false;
 		}
 		currentFocus = -1;
@@ -226,10 +225,10 @@ function autocomplete(inp, arr) {
 				matchingDiv = document.createElement("DIV");
 				matchingDiv.innerHTML = "<strong>" + arr[i].substr(0, val.length) + "</strong>";
 				matchingDiv.innerHTML += arr[i].substr(val.length);
-				matchingDiv.innerHTML += "<input type='hidden' value'" + arr[i] + "'>";
+				matchingDiv.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
 
-				matchingDiv.addEventListener("click", () => {
-					inp.value = this.getElementsByTagName("input")[1].value;
+				matchingDiv.addEventListener("click", function(e) {
+					inp.value = matchingDiv.textContent;
 					closeAllLists();
 				});
 				inputDiv.appendChild(matchingDiv);
@@ -241,20 +240,39 @@ function autocomplete(inp, arr) {
 		if (x) {
 			x = x.getElementsByTagName("div");
 		};
-		if (e.key === "ArrowUp") {
-			currentFocus++;
-			addActive(x);
-		} else if (e.key === "ArrowDown") {
-			currentFocus--;
-			addActive(x);
-		} else if (e.keyCode == 13) {
-			e.preventDefault();
-			if (currentFocus > -1) {
-				if (x) {
+		console.log(x);
+		switch (e.key) {
+			case "ArrowDown" :
+				currentFocus++;
+				addActive(x);
+				console.log(currentFocus)
+				console.log(x[currentFocus].innerHTML);
+				break;
+			case "ArrowUp" :
+				currentFocus--;
+				addActive(x);
+				break;
+			case "Enter" :
+				e.preventDefault();
+				if (currentFocus > -1) {
+					if(x) x[currentFocus] = userInput.value;
 					x[currentFocus].click();
 				}
-			}
 		}
+		// if (e.key === "ArrowDown") {
+		// 	currentFocus++;
+		// 	addActive(x);
+		// } else if (e.key === "ArrowUp") {
+		// 	currentFocus--;
+		// 	addActive(x);
+		// } else if (e.key === "Enter") {
+		// 	e.preventDefault();
+		// 	if (currentFocus > -1) {
+		// 		if (x) {
+		// 			x[currentFocus].click();
+		// 		}
+		// 	}
+		// }
 	});
 	function addActive(x) {
 		if (!x) return false;

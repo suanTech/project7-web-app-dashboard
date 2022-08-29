@@ -454,7 +454,7 @@ textarea:focus {
     border-top: none;
     width: 100%;
     z-index: 99;
-    top: 98%;
+    top: 99%;
     left: 0;
     right: 0;
 }
