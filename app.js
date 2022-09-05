@@ -307,7 +307,7 @@ saveBtn.addEventListener('click', function() {
 	for (let i=0; i < toggleSwitch.length; i++) {
 		localStorage.setItem(toggleSwitch[i].getAttribute("id"), toggleSwitch[i].checked);
 	}
-	localStorage.setItem("timezone", selected);
+	location.reload();
 });
 
 // --- loading the saved settings
@@ -318,7 +318,7 @@ for (let i=0; i < toggleSwitch.length; i++) {
 
 select.addEventListener('change', (e) => {
 	let selected = e.target.value;
-	select.value = selected;
+	localStorage.setItem("timezone", selected);
 });
 if (localStorage.getItem("timezone")) {
 	select.value = localStorage.getItem("timezone");
