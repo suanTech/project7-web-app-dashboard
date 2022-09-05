@@ -14,7 +14,6 @@ const saveBtn = document.getElementById('save-btn');
 const cancelBtn = document.getElementById('cancel-btn');
 
 const toggleSwitch = document.querySelectorAll("input[type='checkbox']");
-const timeZone = document.querySelectorAll("option");
 const select = document.querySelector("select");
 
 // Notification
