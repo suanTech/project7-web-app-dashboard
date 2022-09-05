@@ -282,7 +282,7 @@ textarea:focus {
 /* main header */
 .main {
     display: grid;
-    grid-area: 'main';
+    grid-area: main;
 }
 
 .main-header {
@@ -638,7 +638,6 @@ textarea:focus {
     }
     .member-card {
         flex-direction: row;
-        align-items: left;
         font-size: 1em;
     }
     .member-detail {

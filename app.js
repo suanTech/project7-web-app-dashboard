@@ -1,15 +1,21 @@
 const alertBanner = document.getElementById('alert');
-const trafficCanvas = document.getElementById('traffic-chart');
-const dailyCanvas = document.getElementById('daily-chart');
-const mobileCanvas = document.getElementById('mobile-chart');
 const bellBtn = document.querySelector('.bell');
 const notification = document.querySelector('.notification-btn');
 const notificationDot = document.getElementById('notification-dot');
 const dropdownCont = document.getElementById('dropdown-box');
+const trafficCanvas = document.getElementById('traffic-chart');
+const dailyCanvas = document.getElementById('daily-chart');
+const mobileCanvas = document.getElementById('mobile-chart');
 const trafficNav = document.querySelector('.traffic-nav');
 const userInput = document.getElementById('userInput');
 const message = document.getElementById('messageField');
 const send = document.getElementById('send-btn');
+const saveBtn = document.getElementById('save-btn');
+const cancelBtn = document.getElementById('cancel-btn');
+
+const toggleSwitch = document.querySelectorAll("input[type='checkbox']");
+const timeZone = document.querySelectorAll("option");
+const select = document.querySelector("select");
 
 // Notification
 // --- bell button display dropdown
@@ -100,34 +106,41 @@ function newChart(chart, labels, data) {
 trafficNav.addEventListener('click', (e) => {
 	const btn = e.target;
 	const li = document.getElementsByClassName('traffic-link');
+	let labels;
+	let data;
 	for (i = 0; i < li.length; i++) {
 		li[i].classList.remove('active');
 	}
 	if(btn.classList.contains('traffic-link')) {
 		btn.classList.add('active');
 	} 
-	if (btn.textContent === 'Weekly') {
-		let labels = ['16-22', '23-29', '30-5', '6-12', '13-19', '20-26', '27-3', '4-10', '11-17', '16-24', '25-31'];
-		let data = [750, 1250, 1000, 2000, 1500, 1750, 1250, 1850, 2250, 1500, 2500]
-		newChart(trafficChart, labels, data);
-	} else if (btn.textContent === 'Daily') {
-		let labels = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
-		let data = [150, 75, 200, 175, 200, 250, 275];
-		newChart(trafficChart, labels, data);
-	} else if (btn.textContent === 'Hourly') {
-		let labels = ['0-4', '4-8', '8-12', '12-16', '16-20', '20-24'];
-		let data = [5, 15, 25, 20, 25, 15];
-		newChart(trafficChart, labels, data);
-	} else if (btn.textContent === 'Monthly') {
-		let labels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug','Sep','Oct','Nov','Dec'];
-		let data = [3000, 3750, 4000, 3250, 4250, 3250, 2750, 3000, 4000, 3750, 3500, 3500];
-		newChart(trafficChart, labels, data);
-	};
+	switch (btn.textContent) {
+		case 'Weekly':
+			labels = ['16-22', '23-29', '30-5', '6-12', '13-19', '20-26', '27-3', '4-10', '11-17', '16-24', '25-31'];
+			data = [750, 1250, 1000, 2000, 1500, 1750, 1250, 1850, 2250, 1500, 2500]
+			newChart(trafficChart, labels, data);
+			break;
+		case 'Daily' :
+			labels = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+			data = [150, 75, 200, 175, 200, 250, 275];
+			newChart(trafficChart, labels, data);
+			break;
+		case 'Hourly' :
+			labels = ['0-4', '4-8', '8-12', '12-16', '16-20', '20-24'];
+			data = [5, 15, 25, 20, 25, 15];
+			newChart(trafficChart, labels, data);
+			break;
+		case 'Monthly' :
+			labels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug','Sep','Oct','Nov','Dec'];
+			data = [3000, 3750, 4000, 3250, 4250, 3250, 2750, 3000, 4000, 3750, 3500, 3500];
+			newChart(trafficChart, labels, data);
+			break;
+	}
 });
 
 // Chart 2 - bar
 const dailyData = {
-	labels: [	'S', 'M',	'T', 'W',	'T', 'F', 'S'],
+	labels: [ 'S', 'M', 'T', 'W', 'T', 'F', 'S'],
 	datasets: [{
 		label: '# of Hits',
 		data: [75, 115, 175, 125, 225, 200, 100],
@@ -228,7 +241,7 @@ function autocomplete(inp, arr) {
 				matchingDiv.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
 
 				matchingDiv.addEventListener("click", function(e) {
-					inp.value = matchingDiv.textContent;
+					inp.value = this.getElementsByTagName("input")[0].value;
 					closeAllLists();
 				});
 				inputDiv.appendChild(matchingDiv);
@@ -240,13 +253,10 @@ function autocomplete(inp, arr) {
 		if (x) {
 			x = x.getElementsByTagName("div");
 		};
-		console.log(x);
 		switch (e.key) {
 			case "ArrowDown" :
 				currentFocus++;
 				addActive(x);
-				console.log(currentFocus)
-				console.log(x[currentFocus].innerHTML);
 				break;
 			case "ArrowUp" :
 				currentFocus--;
@@ -255,24 +265,11 @@ function autocomplete(inp, arr) {
 			case "Enter" :
 				e.preventDefault();
 				if (currentFocus > -1) {
-					if(x) x[currentFocus] = userInput.value;
+					if(x) {
 					x[currentFocus].click();
+					}
 				}
 		}
-		// if (e.key === "ArrowDown") {
-		// 	currentFocus++;
-		// 	addActive(x);
-		// } else if (e.key === "ArrowUp") {
-		// 	currentFocus--;
-		// 	addActive(x);
-		// } else if (e.key === "Enter") {
-		// 	e.preventDefault();
-		// 	if (currentFocus > -1) {
-		// 		if (x) {
-		// 			x[currentFocus].click();
-		// 		}
-		// 	}
-		// }
 	});
 	function addActive(x) {
 		if (!x) return false;
@@ -302,4 +299,39 @@ function autocomplete(inp, arr) {
 		closeAllLists(e.target);
 	});
 };
+
+
+// Settings
+// --- save button saves the current setting
+saveBtn.addEventListener('click', function() {
+	for (let i=0; i < toggleSwitch.length; i++) {
+		localStorage.setItem(toggleSwitch[i].getAttribute("id"), toggleSwitch[i].checked);
+	}
+	localStorage.setItem("timezone", selected);
+});
+
+// --- loading the saved settings
+for (let i=0; i < toggleSwitch.length; i++) {
+	const checked = JSON.parse(localStorage.getItem(toggleSwitch[i].getAttribute("id")));
+	toggleSwitch[i].checked = checked;
+}
+
+select.addEventListener('change', (e) => {
+	let selected = e.target.value;
+	select.value = selected;
+});
+if (localStorage.getItem("timezone")) {
+	select.value = localStorage.getItem("timezone");
+}
+
+// --- cancel button delete data
+cancelBtn.addEventListener('click', function() {
+	localStorage.clear();
+	location.reload();
+})
+
+
+
+
+
 

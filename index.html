@@ -30,13 +30,13 @@
             </div>
         </div>
         <img class="student-img round" src="images/member-3.jpg" alt="photo of member3">
-        <h4 class="white-text">Student Name</h4>
+        <h4>Student Name</h4>
     </header>
     <nav class="nav">
-        <a href="#top"><img class="nav-icon" src="svgs/home.svg"></a>
-        <a href="#chart"><img class="nav-icon" src="svgs/bar-chart.svg"></a>
-        <a href="#members"><img class="nav-icon" src="svgs/members.svg"></a>
-        <a href="#settings"><img class="nav-icon" src="svgs/settings.svg"></a>
+        <a href="#top"><img class="nav-icon" src="svgs/home.svg" alt="home icon"></a>
+        <a href="#chart"><img class="nav-icon" src="svgs/bar-chart.svg" alt="chart icon"></a>
+        <a href="#members"><img class="nav-icon" src="svgs/members.svg" alt="members icon"></a>
+        <a href="#settings"><img class="nav-icon" src="svgs/settings.svg" alt="settings icon"></a>
     </nav>
     <main class="main" id="top">
         <div class="main-header">
@@ -194,28 +194,28 @@
             <div class="switch">
                 <label class="toggle">
                     <span class="toggle-label">Send Email Notifications</span>
-                    <input class="toggle-checkbox" type="checkbox">
-                    <div class="toggle-switch">
-                        <div class="switch-label"></div>
-                    </div>
+                    <input class="toggle-checkbox" type="checkbox" id="email-settings">
+                    <span class="toggle-switch">
+                        <span class="switch-label"></span>
+                    </span>
                 </label>
             </div>
             <div class="switch">
                 <label class="toggle">
                     <span class="toggle-label">Set Profile to Public</span>
-                    <input class="toggle-checkbox" type="checkbox">
-                    <div class="toggle-switch">
-                        <div class="switch-label"></div>
-                    </div>
+                    <input class="toggle-checkbox" type="checkbox" id="profile-settings">
+                    <span class="toggle-switch">
+                        <span class="switch-label"></span>
+                    </span>
                 </label>
             </div>
             <select class="input-box" id="timezone">
                 <option disabled selected>Select Timezone</option>
-                <option>AWST(UTC+8)</option>
-                <option>ACWST(UTC+8:45)</option>
-                <option>ACST(UTC+9:30)</option>
-                <option>AEST(UTC+10)</option>
-                <option>LHST(UTC+10:30)</option>
+                <option value="AWST">AWST(UTC+8)</option>
+                <option value="ACWST">ACWST(UTC+8:45)</option>
+                <option value="ACST">ACST(UTC+9:30)</option>
+                <option value="AEST">AEST(UTC+10)</option>
+                <option value="LHST">LHST(UTC+10:30)</option>
             </select>
             <div class="settings-btn">
                 <button class="button-box" id="save-btn">SAVE</button>
@@ -224,6 +224,6 @@
         </section>
     </main>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.8.0/chart.min.js" integrity="sha512-sW/w8s4RWTdFFSduOTGtk4isV1+190E/GghVffMA9XczdJ2MDzSzLEubKAs5h0wzgSJOQTRYyaz73L3d6RtJSg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="app.js" type="text/javascript"></script>
+    <script src="app.js"></script>
 </body>
 </html>
