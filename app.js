@@ -33,7 +33,12 @@ notification.addEventListener('click',(e) => {
 // --- dropdown disappear when messages clicked
 dropdownCont.addEventListener('click', (e) => {
 	const element = e.target;
-	if (element.classList.contains('close-btn')) {
+	const messages = document.querySelector('.messages');
+	const messageList = messages.children;
+	if (messageList.length !== 1) {
+		messages.removeChild(element);
+	} else if (messageList.length <= 1 ){
+		messages.removeChild(element);
 		dropdownCont.style.display = 'none';
 		notificationDot.style.opacity = '0';
 		bellBtn.style.transform = 'scale(1) rotate(0)';

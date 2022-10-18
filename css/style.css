@@ -213,6 +213,7 @@ textarea:focus {
 .dropdown-content {
     display: none;
     position: absolute;
+    top: -50px;
     min-width: 280px;
     height: auto;
     border-radius: 7px;
@@ -226,7 +227,7 @@ textarea:focus {
     text-align: center;
     font-weight: bold;
 }
-.dropdown-content .notifications {
+.dropdown-content .messages {
     background-color: var(--clr-light);
     border-top: var(--bdr-grey);
     border: 2px solid transparent;
